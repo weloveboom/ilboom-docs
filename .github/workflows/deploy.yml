@@ -27,6 +27,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      - run: npm run encrypt
+        env:
+          DOCS_PASSWORD: ${{ secrets.DOCS_PASSWORD }}
 
       - uses: actions/configure-pages@v5
 

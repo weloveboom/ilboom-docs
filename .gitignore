@@ -20,3 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 .pdf-temp/
 ILBOOM-documentacion.pdf
+build/
+ILBOOM-documentacion.pdf
+.pdf-temp/

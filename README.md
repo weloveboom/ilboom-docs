@@ -1,6 +1,14 @@
 # ILBOOM Docs
 
-Portal de documentación del proyecto ILBOOM, construido con [Docusaurus](https://docusaurus.io/).
+Portal de documentación del proyecto ILBOOM, construido con [Docusaurus](https://docusaurus.io/). Protegido con contraseña vía [pagecrypt](https://github.com/Greenheart/pagecrypt) (AES-256-GCM en el navegador).
+
+## Contraseña
+
+La contraseña se configura en GitHub Secrets como `DOCS_PASSWORD`. El workflow la inyecta al hacer `npm run encrypt` después del build. Para desarrollo local:
+
+```bash
+DOCS_PASSWORD="tuclave" npm run encrypt
+```
 
 ## Estructura
 
