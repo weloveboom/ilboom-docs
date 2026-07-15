@@ -30,9 +30,16 @@ npm run build
 npm run serve   # previsualizar build de producción
 ```
 
-## Deploy
+## Deploy a GitHub Pages
 
-El sitio se despliega automáticamente a Cloudflare Pages desde la rama `main`. Configuración de DNS: `docs.ilboom.cl` → Cloudflare Pages.
+El deploy es automático: cada push a `main` dispara el workflow `.github/workflows/deploy.yml` que publica el sitio en GitHub Pages con el dominio `docs.ilboom.cl`.
+
+**Configuración única (ya hecha):**
+1. Settings → Pages → Source: **GitHub Actions**
+2. Settings → Pages → Custom domain: `docs.ilboom.cl`
+3. DNS (Cloudflare): CNAME `docs` → `weloveboom.github.io`
+
+El certificado SSL lo gestiona GitHub automáticamente.
 
 ## Generar PDF
 
@@ -42,8 +49,11 @@ bash generar-pdf.sh
 
 Genera `ILBOOM-documentacion.pdf` con todos los documentos unificados. Requiere Node.js 18+ y Google Chrome instalado.
 
-## Secciones pendientes
+## Estado
 
-- [ ] Swagger UI: agregar `@nestjs/swagger` en el backend para auto-generar la referencia de API en `https://api.weloveboom.cloud/ib/api/docs`
-- [ ] Storybook: inicializar en el frontend y linkear desde el portal
+- [x] Documentación del proyecto (6 docs)
+- [x] Swagger UI — configurado en backend en `/ib/api/docs`
+- [x] Storybook — inicializado en frontend, stories de Button y Card
+- [x] PDF unificado (`bash generar-pdf.sh`)
+- [ ] Deploy a Cloudflare Pages (`docs.ilboom.cl`)
 - [ ] Icono/logo personalizado para ILBOOM
