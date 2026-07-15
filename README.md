@@ -1,61 +1,49 @@
-# ILBOOM — Documentación del Proyecto
+# ILBOOM Docs
 
-## ¿Qué es ILBOOM?
+Portal de documentación del proyecto ILBOOM, construido con [Docusaurus](https://docusaurus.io/).
 
-ILBOOM es una red social para creadores de contenido con herramientas de monetización integradas. Los creadores pueden publicar contenido, vender productos en su tienda, ofrecer video on demand (VOD), transmitir en vivo, lanzar campañas de crowdfunding y recibir propinas. Los usuarios descubren contenido, siguen creadores, compran productos y participan en campañas.
+## Estructura
 
-El proyecto se compone de **2 repositorios principales** más herramientas de infraestructura:
+```
+docs/
+├── intro.md                  ← Visión general del proyecto
+├── arquitectura.md           ← Arquitectura, servicios, seguridad
+├── modulos.md                ← Backend y frontend: módulos, rutas, componentes
+├── despliegue.md             ← Infraestructura, CI/CD, Docker, variables de entorno, costos
+├── decisiones-tecnicas.md    ← Decisiones de diseño, riesgos, mitigaciones
+└── bugs-y-limitaciones.md    ← Bugs, pendientes, limitaciones
+```
 
-- **Backend**: API monolítica en NestJS (`IB-monolitic-backend`)
-- **Frontend**: Aplicación web en Next.js (`inboom_frontend`)
-- **Infraestructura**: Terraform, scripts y documentación de despliegue (`infra-ilboom`)
+## Desarrollo local
 
-## Stack tecnológico resumido
+```bash
+npm install
+npm start
+```
 
-| Capa | Tecnología |
-|------|-----------|
-| Backend | NestJS 11, TypeScript 5.7, TypeORM 0.3.28 |
-| Frontend | Next.js 16, React 19, Tailwind CSS v4 |
-| Base de datos | PostgreSQL (Supabase) / SQLite (desarrollo local) |
-| Autenticación | Firebase Auth |
-| Tiempo real | Firebase Firestore (chat, notificaciones) |
-| Almacenamiento | Cloudflare R2 (S3-compatible) |
-| Streaming | Cloudflare Stream (live RTMPS + VOD HLS) |
-| Pagos | Stripe, MercadoPago, dLocalGo |
-| Infraestructura | GCP Cloud Run + Cloudflare (CDN, DNS, WAF) |
-| IaC | Terraform |
+Abre http://localhost:3000 en el navegador. Los cambios en `docs/` se reflejan en vivo.
 
-## Estado actual
+## Build
 
-MVP funcional en producción en [weloveboom.cloud](https://weloveboom.cloud). **22 módulos de backend completos**, frontend con todas las rutas principales activas. Migración de dominio a `ilboom.cl` planificada.
+```bash
+npm run build
+npm run serve   # previsualizar build de producción
+```
 
-## Para quién es este documento
+## Deploy
 
-Para inversionistas, revisores técnicos y cualquier persona que necesite entender la arquitectura, el alcance y el estado del proyecto **sin acceso al código fuente**. Si en una etapa posterior se requiere revisar el código, esta documentación sirve como mapa de navegación.
-
-## Índice de documentos
-
-| Documento | Contenido |
-|-----------|-----------|
-| [arquitectura.md](arquitectura.md) | Diagrama de alto nivel, servicios cloud, flujo de requests, capas de seguridad |
-| [modulos.md](modulos.md) | Backend: 22 módulos con propósito y endpoints. Frontend: rutas, componentes, contextos |
-| [despliegue.md](despliegue.md) | Infraestructura GCP + Cloudflare, CI/CD, Docker, variables de entorno, costos |
-| [decisiones-tecnicas.md](decisiones-tecnicas.md) | Decisiones de arquitectura relevantes, riesgos y mitigaciones |
-| [bugs-y-limitaciones.md](bugs-y-limitaciones.md) | Bugs conocidos, funcionalidad pendiente, limitaciones técnicas |
+El sitio se despliega automáticamente a Cloudflare Pages desde la rama `main`. Configuración de DNS: `docs.ilboom.cl` → Cloudflare Pages.
 
 ## Generar PDF
-
-Para compartir sin dar acceso al repositorio, ejecutar:
 
 ```bash
 bash generar-pdf.sh
 ```
 
-Genera `ILBOOM-documentacion.pdf` con todos los documentos unificados.
+Genera `ILBOOM-documentacion.pdf` con todos los documentos unificados. Requiere Node.js 18+ y Google Chrome instalado.
 
----
+## Secciones pendientes
 
-## Contacto
-
-- **Dominio actual**: [weloveboom.cloud](https://weloveboom.cloud)
-- **Dominio futuro**: ilboom.cl (migración planificada)
+- [ ] Swagger UI: agregar `@nestjs/swagger` en el backend para auto-generar la referencia de API en `https://api.weloveboom.cloud/ib/api/docs`
+- [ ] Storybook: inicializar en el frontend y linkear desde el portal
+- [ ] Icono/logo personalizado para ILBOOM
