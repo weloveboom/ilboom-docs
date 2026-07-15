@@ -32,12 +32,12 @@ npm run serve   # previsualizar build de producción
 
 ## Deploy a GitHub Pages
 
-El deploy es automático: cada push a `main` dispara el workflow `.github/workflows/deploy.yml` que publica el sitio en GitHub Pages con el dominio `docs.ilboom.cl`.
+El deploy es automático: cada push a `main` dispara el workflow `.github/workflows/deploy.yml` que publica el sitio en GitHub Pages con el dominio `docs.weloveboom.cloud`.
 
-**Configuración única (ya hecha):**
-1. Settings → Pages → Source: **GitHub Actions**
-2. Settings → Pages → Custom domain: `docs.ilboom.cl`
-3. DNS (Cloudflare): CNAME `docs` → `weloveboom.github.io`
+**Para activar:**
+1. Repo settings → Pages → Source: **GitHub Actions**
+2. Repo settings → Pages → Custom domain: `docs.weloveboom.cloud`
+3. DNS (Cloudflare): CNAME `docs` → `weloveboom.github.io` en la zona `weloveboom.cloud`
 
 El certificado SSL lo gestiona GitHub automáticamente.
 

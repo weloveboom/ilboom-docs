@@ -9,7 +9,7 @@ const config: Config = {
 
   future: { v4: true },
 
-  url: 'https://docs.ilboom.cl',
+  url: 'https://docs.weloveboom.cloud',
   baseUrl: '/',
 
   organizationName: 'weloveboom',
