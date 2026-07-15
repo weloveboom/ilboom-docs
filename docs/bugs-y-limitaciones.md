@@ -31,18 +31,13 @@
 | **Transcoder de video en frontend** | Archivo stub (`lib/workers/video-transcoder.worker.ts`). El TODO dice `integrate @ffmpeg/ffmpeg when ffmpeg.wasm is approved for install`. Actualmente solo simula el delay con `setTimeout`. | **Alta** — Bloquea la compresión de video del lado del cliente antes de subir. |
 | **Verificación de email en registro** | Parcialmente implementada. El formulario `VerifyEmailForm.tsx` tiene un TODO que indica que la verificación real con Firebase no está completa. | **Alta** — Usuarios pueden registrarse sin verificar email. |
 | **Verificación de código de recuperación de contraseña** | `VerifyPasswordResetForm.tsx` tiene un TODO: la verificación del código no está implementada realmente. | **Alta** — El flujo de recuperación de contraseña no está completo. |
-| **Integración completa de pagos en frontend** | 5 fases documentadas en `docs/payments-integration-plan.md`. Pendiente: recarga de billetera, checkout de tienda con wallet + fallback externo, solicitudes de retiro (payout). | **Alta** — La monetización depende de esto. |
-| **Upload de video con presigned URLs** | Especificación y plan aprobados (`2026-07-07-video-presigned-upload`). Migrar de multipart (límite 32 MB en Cloud Run) a URLs prefirmadas de R2 con barra de progreso y compresión ffmpeg.wasm. | **Alta** — Resuelve el límite de 32 MB en uploads. |
+| **Upload de video con presigned URLs** | ✅ **Completado.** Migración de multipart (límite 32 MB en Cloud Run) a URLs prefirmadas de R2 con barra de progreso y compresión ffmpeg.wasm. El límite de 32 MB ya no aplica. | ~~Alta~~ |
 | **Migración de dominio** (`weloveboom.cloud` → `ilboom.cl`) | Plan de 10 pasos documentado. Implica ~36 referencias en código, variables de entorno y URLs de webhook de terceros. | **Media** — No es blocker funcional, pero es necesario para la marca. |
 | **Tests automatizados** | Backend: Jest configurado con algunos tests unitarios (gateways), cobertura baja. Frontend: tests de contextos (PostInteractions, Auth), cobertura baja. | **Media** — Sin cobertura mínima, los deploys no tienen red de seguridad. |
 | **APM / Observabilidad** | Solo logs de Winston. Sin Datadog, Sentry ni similar. | **Media** — Debugging en producción depende de Cloud Run logs. |
 | **Google Sign-In en frontend** | Soportado vía `signInWithGooglePopup()` pero no completamente integrado en todos los flujos. | **Baja** |
 
 ## Limitaciones Técnicas
-
-### Upload de archivos limitado a 32 MB
-
-Cloud Run impone un límite de 32 MB en el body de requests HTTP. Esto afecta la subida de videos grandes. La migración a R2 presigned URLs (funcionalidad pendiente) resolverá esto al permitir que el cliente suba directamente a R2 sin pasar por Cloud Run.
 
 ### Cold start de Cloud Run
 
@@ -61,7 +56,3 @@ Si Firebase/Firestore tiene una interrupción, el chat en vivo y las notificacio
 ### Monolito único
 
 Aunque los módulos están aislados lógicamente, un deploy fallido del monolito afecta a todos los módulos simultáneamente. No hay deploys parciales por módulo.
-
-### Sin API pública documentada
-
-No existe un API documentation (tipo Swagger/OpenAPI). Los endpoints están documentados en el código y en los skills del agente de desarrollo, pero no hay un documento público para integradores externos.
