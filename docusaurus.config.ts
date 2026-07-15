@@ -82,10 +82,9 @@ const config: Config = {
           ],
         },
         {
-          title: 'API y Componentes',
+          title: 'API',
           items: [
             { label: 'API Reference (Swagger)', href: 'https://api.weloveboom.cloud/ib/api/docs' },
-            { label: 'Storybook', href: '#' },
           ],
         },
         {
